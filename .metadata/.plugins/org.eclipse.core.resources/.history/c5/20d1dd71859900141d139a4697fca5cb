@@ -1,0 +1,10 @@
+package pacman.obj;
+
+import javax.swing.JFrame;
+
+public class Field extends JFrame {
+	
+	int lines;
+	int columns;
+	
+}

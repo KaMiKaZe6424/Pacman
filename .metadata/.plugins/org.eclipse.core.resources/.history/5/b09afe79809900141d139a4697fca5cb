@@ -1,0 +1,9 @@
+package pacman.main;
+
+import java.util.HashMap;
+
+public class Configuration extends HashMap<String, Object> {
+	
+	
+	
+}

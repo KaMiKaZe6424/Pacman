@@ -1,0 +1,9 @@
+package pacman.obj;
+
+import javax.swing.JPanel;
+
+public abstract class Collidable extends JPanel {
+	
+	public abstract void update();
+	
+}
