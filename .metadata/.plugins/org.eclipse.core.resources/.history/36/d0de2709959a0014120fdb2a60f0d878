@@ -1,0 +1,18 @@
+package pacman.obj;
+
+public class Square {
+	
+	public int x;
+	public int y;
+	
+	private boolean top;
+	private boolean left;
+	private boolean bottom;
+	private boolean right;
+	
+	public Square(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+}

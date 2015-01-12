@@ -1,0 +1,28 @@
+package pacman.obj;
+
+public class Square {
+	
+	public int x;
+	public int y;
+	
+	private int size;
+	
+	private boolean top;
+	private boolean left;
+	private boolean bottom;
+	private boolean right;
+	
+	public Square(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public int getAbsoluteX() {
+		return (x * size) + size / 2;
+	}
+	
+	public int getAbsoluteY() {
+		return (y * size) + size / 2;
+	}
+	
+}

@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>readme</name>
+			<type>1</type>
+			<location>E:/GitHub/Repos/JPacman/readme</location>
+		</link>
+	</linkedResources>
 </projectDescription>

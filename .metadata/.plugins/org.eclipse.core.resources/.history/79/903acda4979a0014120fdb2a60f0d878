@@ -1,0 +1,38 @@
+package pacman.obj;
+
+import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+public class Field extends JFrame {
+	
+	private static final long serialVersionUID = -1865614660647747232L;
+	
+	int lines;
+	int columns;
+	
+	private static List<Collidable> objectsToRender = new ArrayList<Collidable>();;
+	
+	public Field(int l, int c) {
+		lines = l;
+		columns = c;
+		objectsToRender.clear();
+	}
+	
+	
+	public static void addObjectToRender(Collidable collidable) {
+		objectsToRender.add(collidable);
+	}
+	
+	public static void update() {
+		
+	}
+
+	@Override
+	public Graphics getGraphics() {
+		return super.getGraphics();
+	}
+	
+}
