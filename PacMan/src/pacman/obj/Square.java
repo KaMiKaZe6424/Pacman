@@ -21,10 +21,9 @@ public class Square {
 		this.f = f;
 		this.x = x;
 		this.y = y;
-		paintField();
 	}
 	
-	private void paintField() {
+	public void paintField() {
 		Graphics g = f.getGraphics();
 		g.setColor(Color.BLACK);
 		if (top) {

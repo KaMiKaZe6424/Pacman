@@ -1,19 +1,33 @@
 package pacman.obj;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import pacman.main.Game;
 
 public class PacMan extends Collidable {
 	
 	public PacMan() {
-		super(0, 0);
-		setSpeed((int) Game.getConfiguration().get("maxFps", 30) * 50);
+		super(10, 10);
+		setSpeed(2);
+		Game.addObjectToRegistry(this);
 	}
 
 	private static final long serialVersionUID = 4342964723168355959L;
 	
 	@Override
 	public void update() {
-		
+		setPosition();
+		Field.addObjectToRender(this);
+	}
+
+	@Override
+	public void draw() {
+		Graphics g = Game.getField().getFieldGraphics();
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(getLastX(), getLastY(), 20, 20);
+		g.setColor(Color.YELLOW);
+		g.fillRect(getPosX(), getPosY(), 20, 20);
 	}
 	
 }

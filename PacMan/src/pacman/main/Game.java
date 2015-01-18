@@ -3,12 +3,15 @@ package pacman.main;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import pacman.obj.Collidable;
 import pacman.obj.Field;
+import pacman.src.Configuration;
 
 public class Game {
 	
-	private List<Collidable> objReg;
+	private static List<Collidable> objReg;
 	private long maxFps;
 	
 	private static Field field;
@@ -21,26 +24,30 @@ public class Game {
 	
 	public Game() {
 		config = new Configuration();
-		maxFps = (long) config.get("maxFps", 30);
+		maxFps = (long) config.get("maxFps", 30L);
 		objReg = new ArrayList<Collidable>();
 		setupField();
+		
+		
+		
+		update.start();
 	}
 	
 	public static Configuration getConfiguration() {
 		return config;
 	}
 	
-	public void addObjectToRegistry(Collidable c) {
+	public static void addObjectToRegistry(Collidable c) {
 		objReg.add(c);
 	}
 	
-	public void removeObjectFromRegistry(Collidable c) {
+	public static void removeObjectFromRegistry(Collidable c) {
 		objReg.remove(c);
 	}
 	
 	private void setupField() {
 		field = new Field((int) config.get("columns", 10), (int) config.get("lines", 10));
-		field.createGrid();
+		field.setVisible(true);
 	}
 	
 	Thread update = new Thread(new Runnable() {
@@ -48,17 +55,23 @@ public class Game {
 		@SuppressWarnings("static-access")
 		@Override
 		public void run() {
-			for (Collidable c : objReg) {
-				c.update();
-			}
-			
-			try {
-				update.sleep(1000 / maxFps);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			while (true) {
+				for (Collidable c : objReg) {
+					c.update();
+				}
+				field.update();
+				try {
+					update.sleep(1000 / maxFps);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
 	});
+
+	public static Field getField() {
+		return field;
+	}
 	
 }

@@ -1,0 +1,19 @@
+package pacman.obj;
+
+import pacman.main.Game;
+
+public class PacMan extends Collidable {
+	
+	public PacMan() {
+		super(0, 0);
+		setSpeed((int) Game.getConfiguration().get("maxFps", 30) * 50);
+	}
+
+	private static final long serialVersionUID = 4342964723168355959L;
+	
+	@Override
+	public void update() {
+		
+	}
+	
+}
