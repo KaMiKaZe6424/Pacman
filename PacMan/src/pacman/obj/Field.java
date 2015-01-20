@@ -59,12 +59,17 @@ public class Field extends JFrame {
 						exit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {System.exit(0);}});
 						game.add(exit);
 					}
+					{
+						JMenuItem newmap = new JMenuItem("New Map");
+						newmap.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent evt) {System.exit(0);}});
+						game.add(newmap);
+					}
 				}
 			}
 			fld = new JPanel();
 			bg.add(fld);
-			fld.setBackground(Color.RED);
-			fld.setBounds(10, 10, columns*30+10, lines*30+10);
+			fld.setBackground(Color.LIGHT_GRAY);
+			fld.setBounds(10, 10, columns*30+20, lines*30+20);
 		}
 		addKeyListener(kl);
 		
@@ -88,6 +93,21 @@ public class Field extends JFrame {
 			}
 		} catch (NullPointerException e) {}
 		for (Collidable c : objectsToRender) {
+			if (c.getDirection() == "l" && c.getPosX() <= 15) {
+				c.setPosX(15);
+				c.setSpeed(0);
+			} else if (c.getDirection() == "r" && c.getPosX() >= columns*30-15) {
+				c.setPosX(columns*30-15);
+				c.setSpeed(0);
+			} else if (c.getDirection() == "d" && c.getPosY() >= lines*30-15) {
+				c.setPosY(lines*30-15);
+				c.setSpeed(0);
+			} else if (c.getDirection() == "u" && c.getPosY() <= 15) {
+				c.setPosY(15);
+				c.setSpeed(0);
+			} else {
+				c.setSpeed(2);
+			}
 			c.draw();
 		}
 		objectsToRender.clear();
@@ -101,6 +121,7 @@ public class Field extends JFrame {
 		sqrs = new Square[lines * columns];
 		for (int i1 = 1; i1 <= columns ; i1++) {
 			for (int i2 = 1; i2 <= lines ; i2++) {
+				System.out.println("Creating square: " + i1 + ", " + i2 + " at sqrs[" + ((i1-1)*columns + i2 - 1) + "]");
 				sqrs[i1 + i2 - 2] = new Square(i1, i2, this);
 			}
 		}
@@ -144,13 +165,13 @@ public class Field extends JFrame {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				pm.setDirection("d");
+				pm.scheduleDirectionChange("d");
 			} else if (e.getKeyCode() == KeyEvent.VK_UP) {
-				pm.setDirection("u");
+				pm.scheduleDirectionChange("u");
 			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				pm.setDirection("l");
+				pm.scheduleDirectionChange("l");
 			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				pm.setDirection("r");
+				pm.scheduleDirectionChange("r");
 			}
 		}
 

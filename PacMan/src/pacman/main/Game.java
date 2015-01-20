@@ -3,8 +3,6 @@ package pacman.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import pacman.obj.Collidable;
 import pacman.obj.Field;
 import pacman.src.Configuration;

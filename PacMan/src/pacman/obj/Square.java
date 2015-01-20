@@ -8,7 +8,7 @@ public class Square {
 	public int x;
 	public int y;
 	
-	private int size;
+	private int size = 30;
 	
 	private Field f;
 	
@@ -24,8 +24,9 @@ public class Square {
 	}
 	
 	public void paintField() {
-		Graphics g = f.getGraphics();
+		Graphics g = f.getFieldGraphics();
 		g.setColor(Color.BLACK);
+		g.drawRoundRect((x-1)*size+10, (y-1)*size+10, 30, 30, 10, 10);
 		if (top) {
 			g.drawRect(x*size, y*size, 30, 5);
 		}
