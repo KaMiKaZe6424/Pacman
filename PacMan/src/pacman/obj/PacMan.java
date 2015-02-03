@@ -17,8 +17,8 @@ public class PacMan extends Collidable {
 	private boolean isActive = true;
 	
 	public PacMan() {
-		super(15, 15);
-		setSpeed(2);
+		super(5, 5);
+		setSpeed(1);
 		Game.addObjectToRegistry(this);
 		String path = String.valueOf(Game.getConfiguration().get("pacmanImage", "user.home:\\.pacman\\data\\images\\pacman\\PacmanDefault.png"));
 		if (path.contains(":")) {
@@ -33,20 +33,17 @@ public class PacMan extends Collidable {
 	@Override
 	public void update() {
 		setPosition();
-		Field.addObjectToRender(this);
-	}
-
-	@Override
-	public void draw() {
-		Graphics g = Game.getField().getFieldGraphics();
-		g.setColor(Color.LIGHT_GRAY);
-		g.fillRect(getLastX(), getLastY(), 20, 20);
-		g.setColor(Color.YELLOW);
-		g.drawImage(img, getPosX(), getPosY(), 20, 20, imgObs);
 	}
 	
 	public void toggle() {
 		isActive = !isActive;
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0,  0, getWidth(), getHeight());
+		g.drawImage(img, 0, 0, 20, 20, imgObs);
 	}
 	
 }

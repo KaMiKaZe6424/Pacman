@@ -10,7 +10,7 @@ import pacman.src.Configuration;
 public class Game {
 	
 	private static List<Collidable> objReg;
-	private long maxFps;
+	private static long maxFps;
 	
 	private static Field field;
 	
@@ -43,12 +43,16 @@ public class Game {
 		objReg.remove(c);
 	}
 	
+	public static List<Collidable> getObjectRegistry() {
+		return objReg;
+	}
+	
 	private void setupField() {
 		field = new Field((int) config.get("columns", 10), (int) config.get("lines", 10));
 		field.setVisible(true);
 	}
 	
-	Thread update = new Thread(new Runnable() {
+	public static Thread update = new Thread(new Runnable() {
 		
 		@SuppressWarnings("static-access")
 		@Override
@@ -58,6 +62,7 @@ public class Game {
 					c.update();
 				}
 				field.update();
+				
 				try {
 					update.sleep(1000 / maxFps);
 				} catch (InterruptedException e) {

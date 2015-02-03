@@ -3,14 +3,18 @@ package pacman.obj;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import pacman.main.Game;
+
 public class Square {
 	
 	public int x;
 	public int y;
 	
-	private int size = 30;
+	static int size = 30;
 	
 	private Field f;
+	
+	Collidable contains = null;
 	
 	private boolean top;
 	private boolean left;
@@ -25,8 +29,6 @@ public class Square {
 	
 	public void paintField() {
 		Graphics g = f.getFieldGraphics();
-		g.setColor(Color.BLACK);
-		g.drawRoundRect((x-1)*size+10, (y-1)*size+10, 30, 30, 10, 10);
 		if (top) {
 			g.drawRect(x*size, y*size, 30, 5);
 		}
@@ -41,12 +43,29 @@ public class Square {
 		}
 	}
 	
-	public int getAbsoluteX() {
-		return (x * size) + size / 2;
+	public int getX() {
+		return x;
 	}
 	
-	public int getAbsoluteY() {
-		return (y * size) + size / 2;
+	public int getY() {
+		return y;
 	}
 	
+	public boolean isWall(String dir) {
+		if (y == 1 || y == f.getLines() || x % f.getColumns() == 1 || x % f.getColumns() == 0) {
+			return true;
+		}
+		switch (dir) {
+		case "u": return top;
+		case "d": return bottom;
+		case "l": return left;
+		case "r": return right;
+		default: return false;
+		}
+	}
+
+	public void paintBG(Color c) {
+		Game.getField().getFieldGraphics().setColor(c);
+		Game.getField().getFieldGraphics().fillRect((x-1)*size, (y-1)*size, size, size);
+	}
 }
